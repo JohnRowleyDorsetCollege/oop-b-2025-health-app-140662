@@ -29,6 +29,21 @@ namespace HealthApp.Razor.Data
                     }
                 }
 
+                string adminUserName = "admin@healthapp.com";
+                string adminUserEmail = "admin@healthapp.com";
+                string genericPassword = "Letmein01*";
+
+                if (await userManager.FindByEmailAsync(adminUserEmail) == null)
+                {
+
+                    var user = new IdentityUser { UserName = adminUserName, Email = adminUserEmail, EmailConfirmed = true };
+                    await userManager.CreateAsync(user, genericPassword);
+                    await userManager.AddToRoleAsync(user, HealthAppRoles.Admin);
+                }
+
+
+
+
             }
         }
     }
